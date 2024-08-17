@@ -1,0 +1,98 @@
+###Get the service data
+http://localhost:4004/odata/v4/MainService
+
+###Get the service metadata
+http://localhost:4004/odata/v4/MainService/$metadata
+
+### Get all the emeployee data
+http://localhost:4004/odata/v4/MainService/EmployeeSet
+
+### Get single employee details by Key(ID)
+http://localhost:4004/odata/v4/MainService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+
+### Get the total count of all employees
+http://localhost:4004/odata/v4/MainService/EmployeeSet/$count
+
+### GEt employee data chunk by chunk $top and $skip
+http://localhost:4004/odata/v4/MainService/EmployeeSet?$top=2&$skip=3
+
+### Get the employee data based on condition ($filter)
+http://localhost:4004/odata/v4/MainService/EmployeeSet?$filter=salaryAmount gt 70000
+
+### Creating new employee details with existing datafields
+
+POST http://localhost:4004/odata/v4/MainService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Nidhisha",
+  "nameMiddle": null,
+  "nameLast": "Sonaji",
+  "nameInitials": null,
+  "sex": "F",
+  "language": "E",
+  "phoneNumber": "+919876543210",
+  "email": "nidhisha.sonaji@ust.com",
+  "loginName": "NIDHISHA",
+  "Currency_code": "INR",
+  "salaryAmount": 98765,
+  "accountNumber": "111222444",
+  "bankId": "510000685",
+  "bankName": "My Bank of Antioch"
+}
+
+### Get the employee data which we just created
+http://localhost:4004/odata/v4/MainService/EmployeeSet/41397382-c2d6-4607-bf4a-85fb3ad4b50d
+
+### Update the employee data which we just created
+PATCH http://localhost:4004/odata/v4/MainService/EmployeeSet/41397382-c2d6-4607-bf4a-85fb3ad4b50d
+Content-Type: application/json
+
+{
+    "Currency_code": "USD",
+    "salaryAmount": 80000
+}
+
+### Delete the employee data which we just created
+DELETE http://localhost:4004/odata/v4/MainService/EmployeeSet/e16f7808-6c12-4e05-916f-a50cdf8f879f
+
+###
+http://localhost:4004/odata/v4/MainService/EmployeeSet?$filter=salaryAmount gt 70000&$top=3&$orderby=salaryAmount desc
+
+### Filter based on condition
+http://localhost:4004/odata/v4/MainService/EmployeeSet?$filter=contains(nameFirst,'Fr')
+
+### $select
+http://localhost:4004/odata/v4/MainService/EmployeeSet?$select=nameFirst,nameLast
+
+### Get the data from CDS View
+http://localhost:4004/odata/v4/MainService/Products
+
+### Get the single product details
+http://localhost:4004/odata/v4/MainService/Products/74867AD200E41EDBA5D8B06B26EB4052
+
+### Get me the order where this product was used(just item details)
+http://localhost:4004/odata/v4/MainService/Products/74867AD200E41EDBA5D8B06B26EB4052/To_Items
+
+### Get me the product and order details in a single cell
+http://localhost:4004/odata/v4/MainService/Products/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+
+### Get all POs
+http://localhost:4004/odata/v4/MainService/POs
+
+### Get single POs based on Key(ID)
+http://localhost:4004/odata/v4/MainService/POs/74867AD200E41EDBA5D8B0C98DC2A052
+
+
+### Get PO with its items
+http://localhost:4004/odata/v4/MainService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+### Action boost
+POST http://localhost:4004/odata/v4/MainService/POs/74867AD200E41EDBA5D8B0C98DC28052/MainService.boost
+Content-Type: application/json
+
+{}
+
+### Get largest order using function data
+ http://localhost:4004/odata/v4/MainService/getLargestOrder()
+ 
